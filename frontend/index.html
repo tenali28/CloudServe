@@ -1,0 +1,352 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CloudServe | Operations Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="container header-content">
+
+        <div>
+            <h1>CloudServe</h1>
+            <p>Service Request & Incident Management Platform</p>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            API Online
+        </div>
+
+    </div>
+</header>
+
+
+<main class="container">
+
+    <section class="hero">
+
+        <h2>Operations Dashboard</h2>
+
+        <p>
+            Monitor service requests, identify risks,
+            and manage operational workload.
+        </p>
+
+    </section>
+
+
+    <!-- Statistics -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <div class="stat-title">
+                Total Requests
+            </div>
+
+            <div
+                class="stat-value"
+                id="totalRequests"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card critical-card">
+
+            <div class="stat-title">
+                Critical
+            </div>
+
+            <div
+                class="stat-value"
+                id="criticalRequests"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card high-card">
+
+            <div class="stat-title">
+                High Priority
+            </div>
+
+            <div
+                class="stat-value"
+                id="highRequests"
+            >
+                0
+            </div>
+
+        </div>
+
+
+        <div class="stat-card open-card">
+
+            <div class="stat-title">
+                Open
+            </div>
+
+            <div
+                class="stat-value"
+                id="openRequests"
+            >
+                0
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Create Request -->
+
+    <section class="card">
+
+        <h2>Create Service Request</h2>
+
+        <p class="section-description">
+            Submit a new service request for automated
+            prioritization and tracking.
+        </p>
+
+
+        <form id="requestForm">
+
+            <div class="form-group">
+
+                <label for="title">
+                    Request Title
+                </label>
+
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Example: University network outage"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="description">
+                    Description
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="4"
+                    placeholder="Describe the issue..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select id="category">
+
+                        <option value="Network">
+                            Network
+                        </option>
+
+                        <option value="Software">
+                            Software
+                        </option>
+
+                        <option value="Hardware">
+                            Hardware
+                        </option>
+
+                        <option value="Security">
+                            Security
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="requester">
+                        Requester
+                    </label>
+
+                    <input
+                        type="text"
+                        id="requester"
+                        placeholder="Your name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button type="submit">
+                Submit Request
+            </button>
+
+        </form>
+
+
+        <div id="message"></div>
+
+    </section>
+
+
+    <!-- Requests -->
+
+    <section class="card">
+
+        <div class="section-header">
+
+            <div>
+
+                <h2>Service Requests</h2>
+
+                <p class="section-description">
+                    Review and manage current service requests.
+                </p>
+
+            </div>
+
+
+            <button
+                class="secondary-button"
+                onclick="loadRequests()"
+            >
+                Refresh
+            </button>
+
+        </div>
+
+
+        <div class="filters">
+
+            <select id="priorityFilter"
+                    onchange="loadRequests()">
+
+                <option value="ALL">
+                    All Priorities
+                </option>
+
+                <option value="CRITICAL">
+                    Critical
+                </option>
+
+                <option value="HIGH">
+                    High
+                </option>
+
+                <option value="LOW">
+                    Low
+                </option>
+
+            </select>
+
+
+            <select id="statusFilter"
+                    onchange="loadRequests()">
+
+                <option value="ALL">
+                    All Statuses
+                </option>
+
+                <option value="OPEN">
+                    Open
+                </option>
+
+                <option value="IN_PROGRESS">
+                    In Progress
+                </option>
+
+                <option value="RESOLVED">
+                    Resolved
+                </option>
+
+                <option value="CLOSED">
+                    Closed
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                     <tr>
+
+    <th>ID</th>
+    <th>Title</th>
+    <th>Category</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Team</th>
+    <th>Action</th>
+
+</tr>
+
+                </thead>
+
+
+                <tbody id="requestTable">
+
+                    <tr>
+
+                        <td colspan="7">
+                            Loading requests...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
